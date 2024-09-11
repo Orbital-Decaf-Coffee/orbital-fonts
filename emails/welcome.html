@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to Orbital</title>
+    <style>
+        :root{
+            --backgraound-light:"#FFFFFF";
+            --background-dark: "#000000";
+            --accent-purple: "#5f00ff";
+            --accent-green: "#7dff9f";
+            --accent-pink: "#FF00FF";
+            --accent-yellow: "#ffff00";
+            --accent-red: "#ff0000";
+            --text-black: "#4e4f50";
+        }
+
+        @font-face {
+            font-family: 'BalginBoldItalic';
+            src: url('https://cdn.jsdelivr.net/gh/Orbital-Decaf-Coffee/orbital-fonts@ab356f9ca6dc0b240d45bdcaad6ac51f393018da/Balgin%20Black%20Sm%20Condensed%20Italic.ttf') format('truetype');
+        }
+
+        body{
+            width: 600px;
+            max-width: 600px;
+            box-sizing: border-box;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+
+            font-family: "BalginBoldItalic", Helvetica, sans-serif;
+        }
+
+        h1 {
+            position: relative;
+            font-size: 40px;
+            font-weight: 500;
+            color: var(--accent-purple);
+            margin: 0px;
+            margin-top: 3%;
+            line-height: 1;
+            text-transform: uppercase;
+            text-shadow: 3px 0px 0 #000, 5px 0px 0 #000, 7px 0px 0 #000, 9px 0px 0 #000, 11px 0px 0 #000;
+            -webkit-text-stroke-width: 2px;
+            -webkit-text-stroke-color: black;
+            text-decoration: none;
+            z-index: 10;
+        }
+
+        .name{
+            color: var(--accent-pink);
+            font-family: Lato, Helvetica, sans-serif;
+            font-size: 40px;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        .footer {
+            background-color: var(--background-dark);
+            border-color: var(--accent-purple);
+            border-style: solid;
+            border-top: 2px;
+
+            font-family: "BalginBold", Helvetica, sans-serif;
+            font-weight: 500;
+
+        }
+    </style>
+</head>
+
+<body>
+    <!--Header-->
+    <div class="logo">
+        <img src="https://cdn.shopify.com/s/files/1/0742/6297/0669/files/logo-mobv2.png?v=1710162806"/>
+        <span>Decaf coffee out of this world</span>
+    </div>
+    
+    <!--Content-->
+    <h1 class="fonta">Hello</br>Earthling</h1>
+    <p class="name">[[account.name]]</p>
+    <a href="https://www.orbitalcoffee.com/">https://www.orbitalcoffee.com/</a>
+
+    <!--Footer-->
+    <div class="footer">
+
+    </div>
+</body>
+
+</html>
