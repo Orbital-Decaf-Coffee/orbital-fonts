@@ -1,0 +1,949 @@
+{% capture email_title %}
+Thank you for your subscription purchase!
+{% endcapture %}
+{% capture email_body %}
+{% if subscription_contract_billing_cycle.delivery_method != blank %}
+We will notify you when your order has been sent. You will be charged {{ subscription_contract_billing_cycle.total_price
+| money }} every {{ subscription_contract_billing_cycle.billing_frequency }} for each additional upcoming order unless
+you make changes.
+{% else %}
+You will be charged {{ subscription_contract_billing_cycle.total_price | money }} every {{
+subscription_contract_billing_cycle.billing_frequency }} for each additional upcoming order unless you make changes.
+{% endif %}
+{% endcapture %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>{{ email_title }}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" type="text/css" href="/assets/notifications/styles.css">
+    <style>
+        :root {
+            --background-light: #FFFFFF;
+            --background-dark: #010018;
+            --accent-purple: #5f00ff;
+            --accent-green: #7dff9f;
+            --accent-pink: #FF00FF;
+            --accent-yellow: #ffff00;
+            --accent-red: #ff0000;
+            --text-black: #4e4f50;
+        }
+        
+        @font-face {
+            font-family: 'BalginBoldItalic';
+            src: url('https://cdn.jsdelivr.net/gh/Orbital-Decaf-Coffee/orbital-fonts@de536702dd2a90c4fe3ce4e8a682a1dc74303661/Balgin/Balgin%20Black%20Sm%20Condensed%20Italic.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'BalginBoldItalic';
+            src: url('https://cdn.jsdelivr.net/gh/Orbital-Decaf-Coffee/orbital-fonts@de536702dd2a90c4fe3ce4e8a682a1dc74303661/Balgin/Balgin%20Black%20Sm%20Condensed%20Italic.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'BalginBold';
+            src: url('https://cdn.jsdelivr.net/gh/Orbital-Decaf-Coffee/orbital-fonts@de536702dd2a90c4fe3ce4e8a682a1dc74303661/Balgin/Balgin%20Bold%20Sm%20Condensed.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Lato';
+            src: url('https://cdn.jsdelivr.net/gh/Orbital-Decaf-Coffee/orbital-fonts@de536702dd2a90c4fe3ce4e8a682a1dc74303661/Lato/Lato-Regular.ttf') format('truetype');
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td>
+                <table>
+                    <tr>
+                        <td class="header__cell">
+                            <center>
+
+                                <table class="container">
+                                    <tr>
+                                        <td>
+
+                                            <table class="row">
+                                                <tr>
+                                                    <td class="shop-name__cell">
+                                                        {%- if shop.email_logo_url %}
+                                                        <img src="{{shop.email_logo_url}}" alt="{{ shop.name }}"
+                                                            width="{{ shop.email_logo_width }}">
+                                                        {%- else %}
+                                                        <h1 class="shop-name__text">
+                                                            <a href="{{shop.url}}">{{ shop.name }}</a>
+                                                        </h1>
+                                                        {%- endif %}
+                                                    </td>
+
+                                                    <td>
+                                                        <table class="order-po-number__container">
+                                                            <tr>
+                                                                <td class="order-number__cell">
+                                                                    <span class="order-number__text">
+                                                                        Order {{ order_name }}
+                                                                    </span>
+                                                                </td>
+                                                            </tr>
+                                                            {%- if po_number %}
+                                                            {%- endif %}
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </table>
+
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </center>
+                        </td>
+                    </tr>
+                </table>
+
+                <table class="row content">
+                    <tr>
+                        <td class="content__cell">
+                            <center>
+                                <table class="container">
+                                    <tr>
+                                        <td>
+
+                                            <h2>{{ email_title }}</h2>
+                                            <p>{{ email_body }}</p>
+                                            {% if shop.url %}
+                                            <table class="row actions">
+                                                <tr>
+                                                    <td class="empty-line">&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="actions__cell">
+                                                        <table class="button main-action-cell">
+                                                            <tr>
+                                                                <td class="button__cell"><a
+                                                                        href="{{ subscription_contract_billing_cycle.origin_order.order_status_url }}"
+                                                                        class="button__text">View your order</a></td>
+                                                            </tr>
+                                                        </table>
+                                                        <table class="link secondary-action-cell">
+                                                            <tr>
+                                                                <td class="link__cell">or <a
+                                                                        href="{{ subscription_contract_billing_cycle.customer_self_serve_url }}">Manage
+                                                                        your subscription</a></td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            {% endif %}
+
+
+                                        </td>
+                                    </tr>
+                                </table>
+                            </center>
+                        </td>
+                    </tr>
+                </table>
+
+                <table class="row section">
+                    <tr>
+                        <td class="section__cell">
+                            <center>
+                                <table class="container">
+                                    <tr>
+                                        <td>
+                                            <h3>Order summary</h3>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table class="container">
+                                    <tr>
+                                        <td>
+
+
+                                            {% if false %}
+
+                                            <table class="row">
+                                                {% for line in subtotal_line_items %}
+                                                {% if line.groups.size == 0 %}
+
+                                                <tr class="order-list__item">
+                                                    <td class="order-list__item__cell">
+                                                        <table>
+                                                            {% assign expand_bundles = false %}
+
+                                                            {% if expand_bundles and line.bundle_parent? %}
+                                                            <td class="order-list__parent-image-cell">
+                                                                {% if line.image %}
+                                                                <img src="{{ line | img_url: 'compact_cropped' }}"
+                                                                    align="left" width="60" height="60"
+                                                                    class="order-list__product-image" />
+                                                                {% else %}
+                                                                <div class="order-list__no-image-cell">
+                                                                    <img src="{{ 'notifications/no-image.png' | shopify_asset_url }}"
+                                                                        align="left" width="60" height="60"
+                                                                        class="order-list__no-product-image" />
+                                                                </div>
+                                                                {% endif %}
+                                                            </td>
+                                                            {% else %}
+                                                            <td class="order-list__image-cell">
+                                                                {% if line.image %}
+                                                                <img src="{{ line | img_url: 'compact_cropped' }}"
+                                                                    align="left" width="60" height="60"
+                                                                    class="order-list__product-image" />
+                                                                {% else %}
+                                                                <div class="order-list__no-image-cell">
+                                                                    <img src="{{ 'notifications/no-image.png' | shopify_asset_url }}"
+                                                                        align="left" width="60" height="60"
+                                                                        class="order-list__no-product-image" />
+                                                                </div>
+                                                                {% endif %}
+                                                            </td>
+                                                            {% endif %}
+                                                            <td class="order-list__product-description-cell">
+                                                                {% if line.product.title %}
+                                                                {% assign line_title = line.product.title %}
+                                                                {% else %}
+                                                                {% assign line_title = line.title %}
+                                                                {% endif %}
+
+                                                                {% if line.quantity < line.quantity %} {% capture
+                                                                    line_display %} {{ line.quantity }} of {{
+                                                                    line.quantity }} {% endcapture %} {% else %} {%
+                                                                    assign line_display=line.quantity %} {% endif %}
+                                                                    <span class="order-list__item-title">{{ line_title
+                                                                    }}&nbsp;&times;&nbsp;{{ line_display }}</span><br />
+
+                                                                    {% if line.variant.title != 'Default Title' and
+                                                                    line.bundle_parent? == false %}
+                                                                    <span class="order-list__item-variant">{{
+                                                                        line.variant.title }}</span><br />
+                                                                    {% elsif line.variant.title != 'Default Title' and
+                                                                    line.bundle_parent? and expand_bundles == false %}
+                                                                    <span class="order-list__item-variant">{{
+                                                                        line.variant.title }}</span><br />
+                                                                    {% endif %}
+
+                                                                    {% if expand_bundles %}
+                                                                    {% for component in line.bundle_components %}
+                                                                    <table>
+                                                                        <tr class="order-list__item">
+                                                                            <td class="order-list__bundle-item">
+                                                                                <table>
+                                                                                    <td class="order-list__image-cell">
+                                                                                        {% if component.image %}
+                                                                                        <img src="{{ component | img_url: 'compact_cropped' }}"
+                                                                                            align="left" width="40"
+                                                                                            height="40"
+                                                                                            class="order-list__product-image small" />
+                                                                                        {% elsif component.image_url %}
+                                                                                        <img src="{{ component.image_url }}"
+                                                                                            align="left" width="40"
+                                                                                            height="40"
+                                                                                            class="order-list__product-image small" />
+                                                                                        {% else %}
+                                                                                        <div
+                                                                                            class="order-list__no-image-cell small">
+                                                                                            <img src="{{ 'notifications/no-image.png' | shopify_asset_url }}"
+                                                                                                align="left" width="40"
+                                                                                                height="40"
+                                                                                                class="order-list__no-product-image small" />
+                                                                                        </div>
+                                                                                        {% endif %}
+                                                                                    </td>
+
+                                                                                    <td
+                                                                                        class="order-list__product-description-cell">
+                                                                                        {% if component.product.title %}
+                                                                                        {% assign component_title =
+                                                                                        component.product.title %}
+                                                                                        {% else %}
+                                                                                        {% assign component_title =
+                                                                                        component.title %}
+                                                                                        {% endif %}
+
+                                                                                        {% assign component_display =
+                                                                                        component.quantity %}
+
+                                                                                        <span
+                                                                                            class="order-list__item-title">{{
+                                                                                            component_title
+                                                                                            }}&nbsp;&times;&nbsp;{{
+                                                                                            component_display
+                                                                                            }}</span><br>
+
+                                                                                        {% if component.variant.title !=
+                                                                                        'Default Title'%}
+                                                                                        <span
+                                                                                            class="order-list__item-variant">{{
+                                                                                            component.variant.title
+                                                                                            }}</span>
+                                                                                        {% endif %}
+                                                                                    </td>
+                                                                                </table>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                    {% endfor %}
+                                                                    {% else %}
+                                                                    {% for group in line.groups %}
+                                                                    <span class="order-list__item-variant">Part of: {{
+                                                                        group.display_title }}</span><br />
+                                                                    {% endfor %}
+                                                                    {% endif %}
+
+
+                                                                    {% if line.selling_plan_allocation %}
+                                                                    <span class="order-list__item-variant">{{
+                                                                        line.selling_plan_allocation.selling_plan.name
+                                                                        }}</span><br />
+                                                                    {% endif %}
+
+                                                                    {% if line.refunded_quantity > 0 %}
+                                                                    <span
+                                                                        class="order-list__item-refunded">Refunded</span>
+                                                                    {% endif %}
+
+                                                                    {% if line.discount_allocations %}
+                                                                    {% for discount_allocation in
+                                                                    line.discount_allocations %}
+                                                                    {% if
+                                                                    discount_allocation.discount_application.target_selection
+                                                                    != 'all' %}
+                                                                    <p>
+                                                                        <span
+                                                                            class="order-list__item-discount-allocation">
+                                                                            <img src="{{ 'notifications/discounttag.png' | shopify_asset_url }}"
+                                                                                width="18" height="18"
+                                                                                class="discount-tag-icon" />
+                                                                            <span>
+                                                                                {{
+                                                                                discount_allocation.discount_application.title
+                                                                                | upcase }}
+                                                                                (-{{ discount_allocation.amount | money
+                                                                                }})
+                                                                            </span>
+                                                                        </span>
+                                                                    </p>
+                                                                    {% endif %}
+                                                                    {% endfor %}
+                                                                    {% endif %}
+                                                            </td>
+                                                            {% if expand_bundles and line.bundle_parent? %}
+                                                            <td class="order-list__parent-price-cell">
+                                                                {% else %}
+                                                            <td class="order-list__price-cell">
+                                                                {% endif %}
+                                                                {% if line.original_line_price != line.final_line_price
+                                                                %}
+                                                                <del class="order-list__item-original-price">{{
+                                                                    line.original_line_price | money }}</del>
+                                                                {% endif %}
+                                                                <p class="order-list__item-price">
+                                                                    {% if line.final_line_price > 0 %}
+                                                                    {{ line.final_line_price | money }}
+                                                                    {% else %}
+                                                                    Free
+                                                                    {% endif %}
+                                                                </p>
+                                                            </td>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+
+                                                {% endif %}
+                                                {% endfor %}
+                                                {% for line_item_group in line_item_groups %}
+
+                                                {% assign final_line_price = 0 %}
+                                                {% assign original_line_price = 0 %}
+                                                {% assign discount_keys_str = "" %}
+
+                                                {% for component in line_item_group.components %}
+                                                {% assign final_line_price = final_line_price | plus:
+                                                component.final_line_price %}
+                                                {% assign original_line_price = original_line_price | plus:
+                                                component.original_line_price %}
+
+                                                {% for da in component.discount_allocations %}
+                                                {% if da.discount_application.target_selection != 'all' %}
+                                                {% assign discount_key = da.discount_application.title | append:
+                                                da.discount_application.type %}
+                                                {% assign discount_keys_str = discount_keys_str | append: discount_key |
+                                                append: "," %}
+                                                {% endif %}
+                                                {% endfor %}
+                                                {% endfor %}
+
+                                                {% assign discount_keys = discount_keys_str | split: "," | uniq %}
+
+                                                <tr class="order-list__item">
+                                                    <td class="order-list__item__cell">
+                                                        <table>
+                                                            <td class="order-list__parent-image-cell">
+                                                                {% if line_item_group.image %}
+                                                                <img src="{{ line_item_group | img_url: 'compact_cropped' }}"
+                                                                    align="left" width="60" height="60"
+                                                                    class="order-list__product-image" />
+                                                                {% else %}
+                                                                <div class="order-list__no-image-cell">
+                                                                    <img src="{{ 'notifications/no-image.png' | shopify_asset_url }}"
+                                                                        align="left" width="60" height="60"
+                                                                        class="order-list__no-product-image" />
+                                                                </div>
+                                                                {% endif %}
+                                                            </td>
+                                                            <td class="order-list__product-description-cell">
+                                                                <span class="order-list__item-title">{{
+                                                                    line_item_group.title }}&nbsp;&times;&nbsp;{{
+                                                                    line_item_group.quantity }}</span><br />
+
+                                                                {% for component in line_item_group.components %}
+                                                                <table>
+                                                                    <tr class="order-list__item">
+                                                                        <td class="order-list__bundle-item">
+                                                                            <table>
+                                                                                <td class="order-list__image-cell">
+                                                                                    {% if component.image %}
+                                                                                    <img src="{{ component | img_url: 'compact_cropped' }}"
+                                                                                        align="left" width="40"
+                                                                                        height="40"
+                                                                                        class="order-list__product-image" />
+                                                                                    {% else %}
+                                                                                    <div
+                                                                                        class="order-list__no-image-cell small">
+                                                                                        <img src="{{ 'notifications/no-image.png' | shopify_asset_url }}"
+                                                                                            align="left" width="40"
+                                                                                            height="40"
+                                                                                            class="order-list__no-product-image small" />
+                                                                                    </div>
+                                                                                    {% endif %}
+                                                                                </td>
+
+                                                                                <td
+                                                                                    class="order-list__product-description-cell">
+                                                                                    {% if component.product.title %}
+                                                                                    {% assign component_title =
+                                                                                    component.product.title %}
+                                                                                    {% else %}
+                                                                                    {% assign component_title =
+                                                                                    component.title %}
+                                                                                    {% endif %}
+
+                                                                                    <span
+                                                                                        class="order-list__item-title">{{
+                                                                                        component_title
+                                                                                        }}&nbsp;&times;&nbsp;{{
+                                                                                        component.quantity }}</span><br>
+
+                                                                                    {% if component.variant.title !=
+                                                                                    'Default Title'%}
+                                                                                    <span
+                                                                                        class="order-list__item-variant">{{
+                                                                                        component.variant.title
+                                                                                        }}</span>
+                                                                                    {% endif %}
+                                                                                </td>
+                                                                            </table>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                                {% endfor %}
+
+                                                                {% for discount_key in discount_keys %}
+                                                                {% assign discount_amount = 0 %}
+
+                                                                {% for component in line_item_group.components %}
+                                                                {% for da in component.discount_allocations %}
+                                                                {% assign key = da.discount_application.title | append:
+                                                                da.discount_application.type %}
+                                                                {% if da.discount_application.target_selection != 'all'
+                                                                and key == discount_key %}
+                                                                {% assign discount_amount = discount_amount | plus:
+                                                                da.amount %}
+                                                                {% assign discount_title = da.discount_application.title
+                                                                %}
+                                                                {% endif %}
+                                                                {% endfor %}
+                                                                {% endfor %}
+
+                                                                <p>
+                                                                    <span class="order-list__item-discount-allocation">
+                                                                        <img src="{{ 'notifications/discounttag.png' | shopify_asset_url }}"
+                                                                            width="18" height="18"
+                                                                            class="discount-tag-icon" />
+                                                                        <span>
+                                                                            {{ discount_title | upcase }}
+                                                                            (-{{ discount_amount | money }})
+                                                                        </span>
+                                                                    </span>
+                                                                </p>
+                                                                {% endfor %}
+                                                            </td>
+
+                                                            <td class="order-list__parent-price-cell">
+                                                                {% if original_line_price != final_line_price %}
+                                                                <del class="order-list__item-original-price">{{
+                                                                    original_line_price | money }}</del>
+                                                                {% endif %}
+                                                                <p class="order-list__item-price">
+                                                                    {% if final_line_price > 0 %}
+                                                                    {{ final_line_price | money }}
+
+                                                                    {% else %}
+                                                                    Free
+                                                                    {% endif %}
+                                                                </p>
+                                                            </td>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                {% endfor %}
+                                            </table>
+                                            {% else %}
+                                            <table class="row">
+                                                {% for line in subscription_contract_billing_cycle.line_items %}
+
+                                                <tr class="order-list__item">
+                                                    <td class="order-list__item__cell">
+                                                        <table>
+                                                            {% assign expand_bundles = false %}
+
+                                                            {% if expand_bundles and line.bundle_parent? %}
+                                                            <td class="order-list__parent-image-cell">
+                                                                {% if line.image %}
+                                                                <img src="{{ line | img_url: 'compact_cropped' }}"
+                                                                    align="left" width="60" height="60"
+                                                                    class="order-list__product-image" />
+                                                                {% else %}
+                                                                <div class="order-list__no-image-cell">
+                                                                    <img src="{{ 'notifications/no-image.png' | shopify_asset_url }}"
+                                                                        align="left" width="60" height="60"
+                                                                        class="order-list__no-product-image" />
+                                                                </div>
+                                                                {% endif %}
+                                                            </td>
+                                                            {% else %}
+                                                            <td class="order-list__image-cell">
+                                                                {% if line.image %}
+                                                                <img src="{{ line | img_url: 'compact_cropped' }}"
+                                                                    align="left" width="60" height="60"
+                                                                    class="order-list__product-image" />
+                                                                {% else %}
+                                                                <div class="order-list__no-image-cell">
+                                                                    <img src="{{ 'notifications/no-image.png' | shopify_asset_url }}"
+                                                                        align="left" width="60" height="60"
+                                                                        class="order-list__no-product-image" />
+                                                                </div>
+                                                                {% endif %}
+                                                            </td>
+                                                            {% endif %}
+                                                            <td class="order-list__product-description-cell">
+                                                                {% if line.product.title %}
+                                                                {% assign line_title = line.product.title %}
+                                                                {% else %}
+                                                                {% assign line_title = line.title %}
+                                                                {% endif %}
+
+                                                                {% if line.quantity < line.quantity %} {% capture
+                                                                    line_display %} {{ line.quantity }} of {{
+                                                                    line.quantity }} {% endcapture %} {% else %} {%
+                                                                    assign line_display=line.quantity %} {% endif %}
+                                                                    <span class="order-list__item-title">{{ line_title
+                                                                    }}&nbsp;&times;&nbsp;{{ line_display }}</span><br />
+
+                                                                    {% if line.variant.title != 'Default Title' and
+                                                                    line.bundle_parent? == false %}
+                                                                    <span class="order-list__item-variant">{{
+                                                                        line.variant.title }}</span><br />
+                                                                    {% elsif line.variant.title != 'Default Title' and
+                                                                    line.bundle_parent? and expand_bundles == false %}
+                                                                    <span class="order-list__item-variant">{{
+                                                                        line.variant.title }}</span><br />
+                                                                    {% endif %}
+
+                                                                    {% if expand_bundles %}
+                                                                    {% for component in line.bundle_components %}
+                                                                    <table>
+                                                                        <tr class="order-list__item">
+                                                                            <td class="order-list__bundle-item">
+                                                                                <table>
+                                                                                    <td class="order-list__image-cell">
+                                                                                        {% if component.image %}
+                                                                                        <img src="{{ component | img_url: 'compact_cropped' }}"
+                                                                                            align="left" width="40"
+                                                                                            height="40"
+                                                                                            class="order-list__product-image small" />
+                                                                                        {% elsif component.image_url %}
+                                                                                        <img src="{{ component.image_url }}"
+                                                                                            align="left" width="40"
+                                                                                            height="40"
+                                                                                            class="order-list__product-image small" />
+                                                                                        {% else %}
+                                                                                        <div
+                                                                                            class="order-list__no-image-cell small">
+                                                                                            <img src="{{ 'notifications/no-image.png' | shopify_asset_url }}"
+                                                                                                align="left" width="40"
+                                                                                                height="40"
+                                                                                                class="order-list__no-product-image small" />
+                                                                                        </div>
+                                                                                        {% endif %}
+                                                                                    </td>
+
+                                                                                    <td
+                                                                                        class="order-list__product-description-cell">
+                                                                                        {% if component.product.title %}
+                                                                                        {% assign component_title =
+                                                                                        component.product.title %}
+                                                                                        {% else %}
+                                                                                        {% assign component_title =
+                                                                                        component.title %}
+                                                                                        {% endif %}
+
+                                                                                        {% assign component_display =
+                                                                                        component.quantity %}
+
+                                                                                        <span
+                                                                                            class="order-list__item-title">{{
+                                                                                            component_title
+                                                                                            }}&nbsp;&times;&nbsp;{{
+                                                                                            component_display
+                                                                                            }}</span><br>
+
+                                                                                        {% if component.variant.title !=
+                                                                                        'Default Title'%}
+                                                                                        <span
+                                                                                            class="order-list__item-variant">{{
+                                                                                            component.variant.title
+                                                                                            }}</span>
+                                                                                        {% endif %}
+                                                                                    </td>
+                                                                                </table>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                    {% endfor %}
+                                                                    {% else %}
+                                                                    {% for group in line.groups %}
+                                                                    <span class="order-list__item-variant">Part of: {{
+                                                                        group.display_title }}</span><br />
+                                                                    {% endfor %}
+                                                                    {% endif %}
+
+
+                                                                    {% if line.selling_plan_allocation %}
+                                                                    <span class="order-list__item-variant">{{
+                                                                        line.selling_plan_allocation.selling_plan.name
+                                                                        }}</span><br />
+                                                                    {% endif %}
+
+                                                                    {% if line.refunded_quantity > 0 %}
+                                                                    <span
+                                                                        class="order-list__item-refunded">Refunded</span>
+                                                                    {% endif %}
+
+                                                                    {% if line.discount_allocations %}
+                                                                    {% for discount_allocation in
+                                                                    line.discount_allocations %}
+                                                                    {% if
+                                                                    discount_allocation.discount_application.target_selection
+                                                                    != 'all' %}
+                                                                    <p>
+                                                                        <span
+                                                                            class="order-list__item-discount-allocation">
+                                                                            <img src="{{ 'notifications/discounttag.png' | shopify_asset_url }}"
+                                                                                width="18" height="18"
+                                                                                class="discount-tag-icon" />
+                                                                            <span>
+                                                                                {{
+                                                                                discount_allocation.discount_application.title
+                                                                                | upcase }}
+                                                                                (-{{ discount_allocation.amount | money
+                                                                                }})
+                                                                            </span>
+                                                                        </span>
+                                                                    </p>
+                                                                    {% endif %}
+                                                                    {% endfor %}
+                                                                    {% endif %}
+                                                            </td>
+                                                            {% if expand_bundles and line.bundle_parent? %}
+                                                            <td class="order-list__parent-price-cell">
+                                                                {% else %}
+                                                            <td class="order-list__price-cell">
+                                                                {% endif %}
+                                                                {% if line.original_line_price != line.final_line_price
+                                                                %}
+                                                                <del class="order-list__item-original-price">{{
+                                                                    line.original_line_price | money }}</del>
+                                                                {% endif %}
+                                                                <p class="order-list__item-price">
+                                                                    {% if line.final_line_price > 0 %}
+                                                                    {{ line.final_line_price | money }}
+                                                                    {% else %}
+                                                                    Free
+                                                                    {% endif %}
+                                                                </p>
+                                                            </td>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+
+                                                {% endfor %}
+                                            </table>
+                                            {% endif %}
+                                            <table class="row subtotal-lines">
+                                                <tr>
+                                                    <td class="subtotal-spacer"></td>
+                                                    <td>
+                                                        <table class="row subtotal-table">
+                                                            {% if subscription_contract_billing_cycle.total_discounts >
+                                                            0 %}
+
+                                                            <tr class="subtotal-line">
+                                                                <td class="subtotal-line__title">
+                                                                    <p>
+                                                                        <span>{:one=>"Order discount", :other=>"Order
+                                                                            discounts"}</span>
+                                                                    </p>
+                                                                </td>
+                                                                <td class="subtotal-line__value">
+                                                                    <strong>-{{
+                                                                        subscription_contract_billing_cycle.total_discounts
+                                                                        | money }}</strong>
+                                                                </td>
+                                                            </tr>
+
+                                                            {% endif %}
+
+
+                                                            <tr class="subtotal-line">
+                                                                <td class="subtotal-line__title">
+                                                                    <p>
+                                                                        <span>Subtotal</span>
+                                                                    </p>
+                                                                </td>
+                                                                <td class="subtotal-line__value">
+                                                                    <strong>{{
+                                                                        subscription_contract_billing_cycle.subtotal_price
+                                                                        | money }}</strong>
+                                                                </td>
+                                                            </tr>
+
+
+                                                            {% if
+                                                            subscription_contract_billing_cycle.delivery_method.type ==
+                                                            'pick-up' %}
+
+                                                            <tr class="subtotal-line">
+                                                                <td class="subtotal-line__title">
+                                                                    <p>
+                                                                        <span>Pickup</span>
+                                                                    </p>
+                                                                </td>
+                                                                <td class="subtotal-line__value">
+                                                                    <strong>{{
+                                                                        subscription_contract_billing_cycle.shipping_price
+                                                                        | money }}</strong>
+                                                                </td>
+                                                            </tr>
+
+                                                            {% else %}
+
+                                                            <tr class="subtotal-line">
+                                                                <td class="subtotal-line__title">
+                                                                    <p>
+                                                                        <span>Shipping</span>
+                                                                    </p>
+                                                                </td>
+                                                                <td class="subtotal-line__value">
+                                                                    <strong>{{
+                                                                        subscription_contract_billing_cycle.shipping_price
+                                                                        | money }}</strong>
+                                                                </td>
+                                                            </tr>
+
+                                                            {% endif %}
+
+
+                                                            <tr class="subtotal-line">
+                                                                <td class="subtotal-line__title">
+                                                                    <p>
+                                                                        <span>Taxes</span>
+                                                                    </p>
+                                                                </td>
+                                                                <td class="subtotal-line__value">
+                                                                    <strong>{{
+                                                                        subscription_contract_billing_cycle.total_tax |
+                                                                        money }}</strong>
+                                                                </td>
+                                                            </tr>
+
+                                                        </table>
+
+                                                        <table class="row subtotal-table subtotal-table--total">
+
+                                                            <tr class="subtotal-line">
+                                                                <td class="subtotal-line__title">
+                                                                    <p>
+                                                                        <span>Total</span>
+                                                                    </p>
+                                                                </td>
+                                                                <td class="subtotal-line__value">
+                                                                    <strong>{{
+                                                                        subscription_contract_billing_cycle.total_price
+                                                                        | money_with_currency }}</strong>
+                                                                </td>
+                                                            </tr>
+
+                                                        </table>
+
+                                                        {% if subscription_contract_billing_cycle.total_discounts > 0 %}
+                                                        <p class="total-discount">
+                                                            You saved <span class="total-discount--amount">{{
+                                                                subscription_contract_billing_cycle.total_discounts |
+                                                                money }}</span>
+                                                        </p>
+                                                        {% endif %}
+
+                                                    </td>
+                                                </tr>
+                                            </table>
+
+
+                                        </td>
+                                    </tr>
+                                </table>
+                            </center>
+                        </td>
+                    </tr>
+                </table>
+
+                <table class="row section">
+                    <tr>
+                        <td class="section__cell">
+                            <center>
+                                <table class="container">
+                                    <tr>
+                                        <td>
+                                            <h3>Customer information</h3>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table class="container">
+                                    <tr>
+                                        <td>
+
+                                            <table class="row">
+                                                <tr>
+                                                    {% if subscription_contract_billing_cycle.shipping_address %}
+                                                    <td class="customer-info__item">
+                                                        <h4>Shipping address</h4>
+                                                        {{ subscription_contract_billing_cycle.shipping_address |
+                                                        format_address }}
+                                                    </td>
+                                                    {% endif %}
+                                                    {% if subscription_contract_billing_cycle.billing_address %}
+                                                    <td class="customer-info__item">
+                                                        <h4>Billing address</h4>
+                                                        {{ subscription_contract_billing_cycle.billing_address |
+                                                        format_address }}
+                                                    </td>
+                                                    {% endif %}
+                                                </tr>
+                                            </table>
+
+                                            {% if subscription_contract_billing_cycle.payment_instrument %}
+                                            {% assign instrument =
+                                            subscription_contract_billing_cycle.payment_instrument %}
+                                            <table class="row">
+                                                <tr>
+                                                    <td class="customer-info__item">
+                                                        <h4>Payment</h4>
+
+                                                        <p>
+                                                            {% case instrument.payment_type %}
+                                                            {% when "paypal" %}
+                                                            <img src="{{ instrument.payment_type | payment_type_img_url  }}"
+                                                                class="customer-info__item-credit" height="24"
+                                                                alt="PayPal">
+
+                                                            {% when "apple_pay" or "google_pay" or "shopify_pay" %}
+                                                            <img src="{{ instrument.payment_type | payment_type_img_url  }}"
+                                                                class="customer-info__item-credit" height="24">
+
+                                                            <span>
+                                                                {{ instrument.credit_card_company }}
+                                                                ending with {{ instrument.credit_card_last_four_digits
+                                                                }}
+                                                            </span>
+
+                                                            {% else %}
+                                                            <img src="{{ instrument.payment_type | payment_type_img_url  }}"
+                                                                class="customer-info__item-credit" height="24"
+                                                                alt="{{ instrument.credit_card_company }}">
+
+                                                            <span>
+                                                                ending with {{ instrument.credit_card_last_four_digits
+                                                                }}
+                                                            </span>
+                                                            {% endcase %}
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            {% endif %}
+
+                                            {% if subscription_contract_billing_cycle.delivery_method %}
+                                            <table class="row">
+                                                <tr>
+                                                    <td class="customer-info__item">
+                                                        <h4>Shipping method</h4>
+                                                        <p> {{ subscription_contract_billing_cycle.delivery_method.title
+                                                            }} </p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            {% endif %}
+
+                                        </td>
+                                    </tr>
+                                </table>
+                            </center>
+                        </td>
+                    </tr>
+                </table>
+
+                <table class="row footer">
+                    <tr>
+                        <td class="footer__cell">
+                            <center>
+                                <table class="container">
+                                    <tr>
+                                        <td>
+
+                                            <p class="disclaimer__subtext">If you have any questions, reply to this
+                                                email or contact us at <a href="mailto:{{ shop.email }}">{{ shop.email
+                                                    }}</a></p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </center>
+                        </td>
+                    </tr>
+                </table>
+
+                <img src="{{ 'notifications/spacer.png' | shopify_asset_url }}" class="spacer" height="1" />
+
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>
