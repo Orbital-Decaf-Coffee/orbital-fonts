@@ -19,7 +19,7 @@ subscription_contract_billing_cycle.billing_frequency }} for each additional upc
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ email_title }}</title>
-    <style>
+    <style type="text/css">
         @font-face {
             font-family: 'BalginBoldItalic';
             src: url('https://cdn.jsdelivr.net/gh/Orbital-Decaf-Coffee/orbital-fonts@de536702dd2a90c4fe3ce4e8a682a1dc74303661/Balgin/Balgin%20Black%20Sm%20Condensed%20Italic.ttf') format('truetype');
@@ -34,20 +34,71 @@ subscription_contract_billing_cycle.billing_frequency }} for each additional upc
             font-family: 'Lato';
             src: url('https://cdn.jsdelivr.net/gh/Orbital-Decaf-Coffee/orbital-fonts@de536702dd2a90c4fe3ce4e8a682a1dc74303661/Lato/Lato-Regular.ttf') format('truetype');
         }
+
+        .footer_btn_mobile{
+            display: none;
+        }
+
+        .bubble_mobile{
+            display: none;
+        }
+
+        @media only screen and (max-width: 500px) {
+            .padding_table{
+                padding: 50px 30px!important;
+            }
+
+            .size_logo{
+                max-width: 285px !important;
+            }
+
+            .size_logo_letter{
+                font-size: 14px !important;
+            }
+
+            .size_ufo{
+                background-size: 290px !important;
+                height: 220px !important;
+            }
+
+            .size_ufo_letter{
+                margin: 120px 0px 0px 0px !important;
+            }
+
+            .size_radio{
+                width: 245px !important;
+            }
+
+            .footer_btn_desktop{
+                display: none !important;
+            }
+
+            .footer_btn_mobile{
+                display: table-cell !important;
+            }
+
+            .bubble_desktop{
+                display: none !important;
+            }
+
+            .bubble_mobile{
+                display: table-cell !important;
+            }
+        }
     </style>
 </head>
 
 <body
     style="padding: 0px; margin:0px auto; background-color:#eeeeee; border-collapse:collapse;max-width:600px;width:100%;">
+
     <table class="container" role="presentation" width="600" cellspacing="0" cellpadding="0" align="center"
         style="border-collapse:collapse;max-width:600px;width:100%;margin:0px auto;background-color:#010018;">
         <tr>
             <td align="center" cellspacing="0" cellpadding="0" style="margin:0px auto;">
                 <!-- Email content goes here -->
-                <table align="center" cellspacing="0" cellpadding="0" style="width:100%;margin:0px auto;background-color:#010018; padding-left: 100px;
-                    padding-right: 100px;
-                    padding-top: 50px;
-                    padding-bottom: 40px;
+                <table class="padding_table" align="center" cellspacing="0" cellpadding="0" style="
+                    width:100%;margin:0px auto;background-color:#010018;
+                    padding: 50px 100px;
                     vertical-align: middle;
                     background: url(&#39;https://cdn.shopify.com/s/files/1/0742/6297/0669/files/order-email-bg.jpg?v=1728866725&#39;);
                     background-repeat: no-repeat;
@@ -59,8 +110,9 @@ subscription_contract_billing_cycle.billing_frequency }} for each additional upc
                         <td style="text-align: center;">
                             <a target="_blank" href="{{shop.url}}">
                                 <img src="https://cdn.shopify.com/s/files/1/0742/6297/0669/files/logo-mobv2.png?v=1710162806"
-                                    alt="{{ shop.name }}" width="{{ shop.email_logo_width }}"
-                                    style="max-width:357px!important;height:auto;">
+                                    alt="{{ shop.name }}" width="357"
+                                    style="max-width:357px; height:auto;"
+                                    class="size_logo">
                             </a>
                         </td>
                     </tr>
@@ -69,6 +121,7 @@ subscription_contract_billing_cycle.billing_frequency }} for each additional upc
                     <tr>
                         <td style="text-align: center;">
                             <h1
+                                class="size_logo_letter"
                                 style="width:100%;box-sizing:border-box;font-family:'BalginBoldItalic','Impact','Trebuchet Ms',sans-serif;font-style:italic;color:#5f00ff!important;font-size:18px;text-transform:uppercase;letter-spacing:2px;text-align:center;margin:0px;">
                                 Decaf Coffee Out of This World
                             </h1>
@@ -80,10 +133,11 @@ subscription_contract_billing_cycle.billing_frequency }} for each additional upc
                         <td style="text-align: center;">
                             <table align="center"
                                 style="margin: 10px auto 0px auto; background-image: url(&#39;https://cdn.shopify.com/s/files/1/0742/6297/0669/files/nave_email.gif?v=1729144324&#39;); background-repeat: no-repeat; background-position-x: center; height:350px; width: 100%;"
-                                cellspacing="0" cellpadding="0">
+                                cellspacing="0" cellpadding="0" class="size_ufo">
                                 <tr>
                                     <td style="text-align: center;">
                                         <p
+                                            class="size_ufo_letter"
                                             style="font-family: 'BalginBoldItalic', 'Impact', 'Trebuchet MS', sans-serif; font-style: italic; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; text-decoration: none; color: #7dff9f; font-size: 18px; width: 100%; box-sizing: border-box;text-align: center; display: block; margin: 200px 0px 0px 0px;">
                                             Your regularly scheduled abduction has been confirmed.
                                         </p>
@@ -103,8 +157,8 @@ subscription_contract_billing_cycle.billing_frequency }} for each additional upc
 
                     <!--Bubble Product-->
                     <tr>
-                        <td style="text-align: center;">
-                            <table style=" margin-top: 5px; width: 370px; min-width: 370px;  max-width: 370px;"
+                        <td style="text-align: center;" class="bubble_desktop">
+                            <table style=" margin-top: 5px; width: 400px; min-width: 400px;  max-width: 400px;"
                                 align="center" cellspacing="0" cellpadding="0">
                                 <tr>
                                     <td style="text-align: center;">
@@ -115,68 +169,192 @@ subscription_contract_billing_cycle.billing_frequency }} for each additional upc
                                 <tr>
                                     <td style="text-align: center;">
                                         <table
-                                            style="background-color: #EAEAEA; border-collapse: separate; border-radius: 12px; border: 1px solid black; width: 370px; min-width: 370px;  max-width: 370px;"
+                                            style="background-color: #EAEAEA; border-collapse: separate; border-radius: 12px; border: 1px solid black; width: 400px; min-width: 400px;  max-width: 400px;"
                                             align="center" cellspacing="0" cellpadding="0">
                                             <tr>
                                                 <td>
                                                     <p style="opacity: 0; color: #EAEAEA; margin: 20px 0px 0px 0px;">
-                                                        product</p>
+                                                        product blank</p>
                                                 </td>
                                             </tr>
                                             {% for line in subscription_contract_billing_cycle.line_items %}
-                                                <tr>
-                                                    <td style="text-align: center;">
-                                                        <table
-                                                            style=" margin-top: 0px;width: 200px; min-width: 200px;  max-width: 200px;"
-                                                            align="center" cellspacing="0" cellpadding="0">
-                                                            <tr>
-                                                                <td style="text-align: center;">
-                                                                    {% if product.product.product_image_urls %}
-                                                                    <img src="[[product.product.product_image_urls | first]]"
-                                                                        style="width: 150px;" />
-                                                                    {% else%}
-                                                                    <img src="https://app.omnisend.com/image/newsletter/66eca168e130c65b83241f3f"
-                                                                        style="width: 40px;" />
-                                                                    {% endif%}
-                                                                </td>
-                                                                <td style="text-align: center; vertical-align: top;">
-                                                                    <img src="https://app.omnisend.com/image/newsletter/66edf38fe130c65b83246204"
-                                                                        style="width: 44px;" />
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="text-align: center;">
-                                                        <p
-                                                            style="font-family: &#39;BalginBoldItalic&#39;, &#39;Impact&#39;, &#39;Trebuchet MS&#39;, sans-serif; font-style: italic; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; text-decoration: none; color: #5f00ff; font-size: 16px; text-align: center; display: block; margin: 10px 20px 20px 20px;">
-                                                            {{product.title}}
-                                                        </p>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="text-align: center;">
-                                                        <a href="[[product.product.product_url]]" target="_blank"
-                                                            style="font-size: 20px; text-decoration: none; text-align: center; font-family: &#39;BalginBold&#39;, &#39;Impact&#39;, &#39;Trebuchet MS&#39;, sans-serif; font-weight: 500; font-style: italic; text-transform: uppercase; letter-spacing: 2px; color: #ffff00; margin: 5px 0px 40px 0px; background-color: #5f00ff; padding: 12px 24px; border-radius: 28px;">
-                                                            Continue Shopping
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                {% if forloop.last %}
+                                                {% if line.product.title %}
+                                                {% assign line_title = line.product.title %}
                                                 {% else %}
-                                                <tr>
-                                                    <td style="text-align: center;">
-                                                        <img src="https://app.omnisend.com/image/newsletter/66ede0eee130c65b83245ef1"
-                                                            style="margin: 60px 0px 30px 0px;" />
-                                                    </td>
-                                                </tr>
+                                                {% assign line_title = line.title %}
                                                 {% endif %}
+
+                                                {% if line.quantity < line.quantity %} {% capture
+                                                    line_display %} {{ line.quantity }} of {{line.quantity
+                                                    }} {% endcapture %} {% else %} {%assign
+                                                    line_display=line.quantity %} {% endif %}
+                                            <tr>
+                                                <td style="text-align: center; vertical-align: center;">
+                                                    <table
+                                                        style=" margin-top: 0px;width: 380px; min-width: 380px;  max-width: 380px;"
+                                                        align="center" cellspacing="0" cellpadding="0">
+                                                        <tr>
+                                                            <td style="text-align: center; vertical-align: center;">
+                                                                <table
+                                                                    style=" margin-top: 0px;width: 170px; min-width: 170px;  max-width: 170px;"
+                                                                    align="center" cellspacing="0" cellpadding="0">
+
+                                                                    <td
+                                                                        style="text-align: center; vertical-align: center;">
+                                                                        {% if line.image %}
+                                                                        <img src="{{ line | img_url: 'compact_cropped' }}"
+                                                                            style="width: 150px; margin-left: 20px;" />
+                                                                        {% else %}
+                                                                        <img src="https://cdn.shopify.com/s/files/1/0742/6297/0669/files/image.png?v=1729346106"
+                                                                            style="width: 40px; margin-left: 20px;" />
+                                                                        {% endif %}
+                                                                    </td>
+                                                                    <td
+                                                                        style="text-align: center; vertical-align: top;">
+                                                                        <img src="https://app.omnisend.com/image/newsletter/66edf38fe130c65b83246204"
+                                                                            style="width: 44px;" />
+                                                                    </td>
+
+                                                                </table>
+                                                            </td>
+                                                            <td style="text-align: left; vertical-align: center;">
+                                                                <table
+                                                                    style="margin-top: 0px;width: 210px; min-width: 210px;  max-width: 210px;"
+                                                                    align="left" cellspacing="0" cellpadding="0">
+                                                                    <tr>
+                                                                        <td>
+                                                                            <p
+                                                                                style="font-family: 'BalginBoldItalic', 'Impact', 'Trebuchet MS', sans-serif; font-style: italic; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; text-decoration: none; color: #5f00ff; font-size: 16px; text-align: left; display: block; margin: 0px 20px 0px 10px;">
+                                                                                {{line_title}}&nbsp;&times;&nbsp;{{line_display }}
+                                                                            </p>
+                                                                        </td>
+                                                                    </tr>
+                                                                    {% if line.selling_plan_allocation %}
+                                                                    <tr>
+                                                                        <td>
+                                                                            <p style="font-family: 'Lato', 'Helvetica neue', 'Helvetica', 'Arial', sans-serif;
+                                                                                    letter-spacing: 1px;
+                                                                                    text-decoration: none;
+                                                                                    color: #373737;
+                                                                                    font-size: 14px;
+                                                                                    text-align: left;
+                                                                                    margin: 5px 20px 20px 10px;">
+                                                                                {{line.selling_plan_allocation.selling_plan.name}}
+                                                                            </p>
+                                                                        </td>
+                                                                    </tr>
+                                                                    {% endif %}
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
                                             {%endfor%}
                                             <tr>
                                                 <td>
-                                                    <p style="opacity: 0; color: #EAEAEA; margin: 0px 0px 30px 0px;">
-                                                        product</p>
+                                                    <p style="opacity: 0; color: #EAEAEA; margin: 0px 0px 3px 0px;">
+                                                        product blank</p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+
+                        <td style="text-align: center;" class="bubble_mobile">
+                            <table style=" margin-top: 5px; width: 320px; min-width: 320px;  max-width: 320px;"
+                                align="center" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td style="text-align: center;">
+                                        <img src="https://app.omnisend.com/image/newsletter/66edf15a32e44083613afae5"
+                                            style="width: 30px; margin-bottom: -5.5px;" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;">
+                                        <table
+                                            style="background-color: #EAEAEA; border-collapse: separate; border-radius: 12px; border: 1px solid black; width: 320px; min-width: 320px;  max-width: 320px;"
+                                            align="center" cellspacing="0" cellpadding="0">
+                                            <tr>
+                                                <td>
+                                                    <p style="opacity: 0; color: #EAEAEA; margin: 25px 0px 0px 0px;">
+                                                        product blank</p>
+                                                </td>
+                                            </tr>
+                                            {% for line in subscription_contract_billing_cycle.line_items %}
+                                                {% if line.product.title %}
+                                                {% assign line_title = line.product.title %}
+                                                {% else %}
+                                                {% assign line_title = line.title %}
+                                                {% endif %}
+
+                                                {% if line.quantity < line.quantity %} {% capture
+                                                    line_display %} {{ line.quantity }} of {{line.quantity
+                                                    }} {% endcapture %} {% else %} {%assign
+                                                    line_display=line.quantity %} {% endif %}
+                                            <tr>
+                                                <td style="text-align: center; vertical-align: center;">
+                                                    <table
+                                                        style=" margin-top: 0px;width: 300px; min-width: 300px;  max-width: 300px;"
+                                                        align="center" cellspacing="0" cellpadding="0">
+                                                        <tr>
+                                                            <td style="text-align: center; vertical-align: center;">
+                                                                <table
+                                                                    style=" margin-top: 0px;width: 300px; min-width: 300px;  max-width: 300px;"
+                                                                    align="center" cellspacing="0" cellpadding="0">
+
+                                                                    <td
+                                                                        style="text-align: center; vertical-align: center;">
+                                                                        {% if line.image %}
+                                                                        <img src="{{ line | img_url: 'compact_cropped' }}"
+                                                                            style="width: 150px; margin-left: 20px;" />
+                                                                        {% else %}
+                                                                        <img src="https://cdn.shopify.com/s/files/1/0742/6297/0669/files/image.png?v=1729346106"
+                                                                            style="width: 40px; margin-left: 20px;" />
+                                                                        {% endif %}
+                                                                    </td>
+                                                                    <td
+                                                                        style="text-align: center; vertical-align: top;">
+                                                                        <img src="https://app.omnisend.com/image/newsletter/66edf38fe130c65b83246204"
+                                                                            style="width: 44px;" />
+                                                                    </td>
+
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="text-align: center;">
+                                                                <p
+                                                                    style="font-family: 'BalginBoldItalic', 'Impact', 'Trebuchet MS', sans-serif; font-style: italic; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; text-decoration: none; color: #5f00ff; font-size: 16px; text-align: center; display: block; margin: 0px 20px 0px 10px;">
+                                                                    {{line_title}}&nbsp;&times;&nbsp;{{line_display }}
+                                                                </p>
+                                                            </td>
+                                                        </tr>
+                                                        {% if line.selling_plan_allocation %}
+                                                        <tr>
+                                                            <td style="text-align: center;">
+                                                                <p style="font-family: 'Lato', 'Helvetica neue', 'Helvetica', 'Arial', sans-serif;
+                                                                        letter-spacing: 1px;
+                                                                        text-decoration: none;
+                                                                        color: #373737;
+                                                                        font-size: 14px;
+                                                                        text-align: center;
+                                                                        margin: 5px 20px 40px 10px;">
+                                                                    {{line.selling_plan_allocation.selling_plan.name}}
+                                                                </p>
+                                                            </td>
+                                                        </tr>
+                                                        {% endif %}
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            {%endfor%}
+                                            <tr>
+                                                <td>
+                                                    <p style="opacity: 0; color: #EAEAEA; margin: 0px 0px 5px 0px;">
+                                                        product blank</p>
                                                 </td>
                                             </tr>
                                         </table>
@@ -201,89 +379,9 @@ subscription_contract_billing_cycle.billing_frequency }} for each additional upc
                         <td style="text-align: center;">
                             <img alt="Green orbital radio with text &quot;Await further transmission Orbital Command&quot;"
                                 width="339" height="126" border="0"
+                                class="size_radio"
                                 src="https://cdn.shopify.com/s/files/1/0742/6297/0669/files/message_green_compressed.gif?v=1728544442"
                                 style="max-width:339px;height:auto;margin:0 0;vertical-align:middle;font-family:Arial,sans-serif;font-size:12px;color:#000000;line-height:150%;width:339px;">
-                        </td>
-                    </tr>
-                </table>
-                <!--Footer-->
-                <table align="center" cellspacing="0" cellpadding="0"
-                    style="width:100%;margin:0px auto;background-color:#010018;">
-                    <tr>
-                        <td style="font-size:0;line-height:0;border-top:2px solid #5f00ff;">&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <table align="center" cellspacing="10" cellpadding="0" style="margin:20px auto 0px auto;">
-                                <tr>
-                                    <td
-                                        style="background-color:#010018;border:2px solid #7dff9f;border-radius:28px;border-collapse:separate;">
-                                        <a href="https://www.orbitalcoffee.com/products/swiss-water-decaf"
-                                            target="_blank"
-                                            style="font-family:'BalginBold','Impact','Trebuchet MS',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;text-decoration:none;color:#7dff9f;font-size:14px;text-align:center;display:block;margin: 5px 40px;">
-                                            Shop Swiss Water
-                                        </a>
-                                    </td>
-                                    <td
-                                        style="background-color:#010018;border:2px solid #7dff9f;border-radius:28px;border-collapse:separate;">
-                                        <a href="https://www.orbitalcoffee.com/products/sugarcane-half-caff-1"
-                                            target="_blank"
-                                            style="font-family:'BalginBold','Impact','Trebuchet MS',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;text-decoration:none;color:#7dff9f;font-size:14px;text-align:center;display:block;margin: 5px 40px;">
-                                            Shop Sugar Cane
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td
-                                        style="background-color:#010018;border:2px solid #7dff9f;border-radius:28px;border-collapse:separate;">
-                                        <a href="https://www.orbitalcoffee.com/collections/half-caff-coffee"
-                                            target="_blank"
-                                            style="font-family:'BalginBold','Impact','Trebuchet MS',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;text-decoration:none;color:#7dff9f;font-size:14px;text-align:center;display:block;margin: 5px 40px;">
-                                            Shop Half-Caff
-                                        </a>
-                                    </td>
-                                    <td
-                                        style="background-color:#010018;border:2px solid #7dff9f;border-radius:28px;border-collapse:separate;">
-                                        <a href="https://www.orbitalcoffee.com/products/jitter-free-orbital-coffee-subscription"
-                                            target="_blank"
-                                            style="font-family:'BalginBold','Impact','Trebuchet MS',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;text-decoration:none;color:#7dff9f;font-size:14px;text-align:center;display:block;margin: 5px 40px;">
-                                            Subscribe & Save
-                                        </a>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p
-                                style="font-family:'Lato','Helvetica neue','Helvetica','Arial',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:1px;text-decoration:none;color:#7dff9f;font-size:10px;width:100%;text-align:center;margin-top:25px;margin-bottom:15px;">
-                                Copyright © 2024 Orbital Coffee, All rights reserved.
-                            </p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p
-                                style="font-family:'Lato','Helvetica neue','Helvetica','Arial',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:1px;text-decoration:none;color:#7dff9f;font-size:10px;width:100%;text-align:center;margin:0px;">
-                                If you have any questions, contact us at
-                            </p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="mailto:{{ shop.email }}" target="_blank"
-                                style="font-size:10px;text-decoration:underline;text-align:center;font-family:'Lato','Helvetica neue','Helvetica','Arial',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#7dff9f;margin:0px;display: block;">
-                                {{ shop.email }}
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="{{ shop.url }}" target="_blank"
-                                style="font-family:'BalginBold','Impact','Trebuchet MS',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;text-decoration:none;color:#7dff9f;font-size:14px;width:100%;text-align:center;display:block;margin-top:15px; margin-bottom: 40px;">
-                                www.orbitalcoffee.com
-                            </a>
                         </td>
                     </tr>
                 </table>
@@ -291,33 +389,128 @@ subscription_contract_billing_cycle.billing_frequency }} for each additional upc
         </tr>
     </table>
 
-    <!--
-    <table role="presentation" width="600" align="center" cellspacing="0" cellpadding="0" border="0"
-        style="margin:0px auto;background-color:#010018; border-collapse:collapse;max-width:600px;width:100%;">
-
-       
-        <table align="center" cellspacing="0" cellpadding="0" style="margin:0px auto;">
-
-        </table>
-
-
-
+    <!--Footer-->
+    <table align="center" cellspacing="0" cellpadding="0"
+        style="border-collapse:collapse;max-width:600px;width:100%;margin:0px auto;background-color:#010018;">
+        <tr>
+            <td style="font-size:0;line-height:0;border-top:2px solid #5f00ff;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="footer_btn_desktop">
+                <table align="center" cellspacing="10" cellpadding="0" style="margin:20px auto 0px auto;">
+                    <tr>
+                        <td
+                            style="background-color:#010018;border:2px solid #7dff9f;border-radius:28px;border-collapse:separate;">
+                            <a href="https://www.orbitalcoffee.com/products/swiss-water-decaf" target="_blank"
+                                style="font-family:'BalginBold','Impact','Trebuchet MS',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;text-decoration:none;color:#7dff9f;font-size:14px;text-align:center;display:block;margin: 5px 40px;">
+                                Shop Swiss Water
+                            </a>
+                        </td>
+                        <td
+                            style="background-color:#010018;border:2px solid #7dff9f;border-radius:28px;border-collapse:separate;">
+                            <a href="https://www.orbitalcoffee.com/products/sugarcane-half-caff-1" target="_blank"
+                                style="font-family:'BalginBold','Impact','Trebuchet MS',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;text-decoration:none;color:#7dff9f;font-size:14px;text-align:center;display:block;margin: 5px 40px;">
+                                Shop Sugar Cane
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td
+                            style="background-color:#010018;border:2px solid #7dff9f;border-radius:28px;border-collapse:separate;">
+                            <a href="https://www.orbitalcoffee.com/collections/half-caff-coffee" target="_blank"
+                                style="font-family:'BalginBold','Impact','Trebuchet MS',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;text-decoration:none;color:#7dff9f;font-size:14px;text-align:center;display:block;margin: 5px 40px;">
+                                Shop Half-Caff
+                            </a>
+                        </td>
+                        <td
+                            style="background-color:#010018;border:2px solid #7dff9f;border-radius:28px;border-collapse:separate;">
+                            <a href="https://www.orbitalcoffee.com/products/jitter-free-orbital-coffee-subscription"
+                                target="_blank"
+                                style="font-family:'BalginBold','Impact','Trebuchet MS',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;text-decoration:none;color:#7dff9f;font-size:14px;text-align:center;display:block;margin: 5px 40px;">
+                                Subscribe & Save
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td class="footer_btn_mobile">
+                <table align="center" cellspacing="10" cellpadding="0"
+                    style="margin: 20px 0px 0px 0px;
+                    width: 100%;"
+                >
+                    <tr>
+                        <td
+                            style="background-color:#010018;border:2px solid #7dff9f;border-radius:28px;border-collapse:separate;">
+                            <a href="https://www.orbitalcoffee.com/products/swiss-water-decaf" target="_blank"
+                                style="font-family:'BalginBold','Impact','Trebuchet MS',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;text-decoration:none;color:#7dff9f;font-size:14px;text-align:center;display:block;margin: 5px 40px;">
+                                Shop Swiss Water
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td
+                            style="background-color:#010018;border:2px solid #7dff9f;border-radius:28px;border-collapse:separate;">
+                            <a href="https://www.orbitalcoffee.com/products/sugarcane-half-caff-1" target="_blank"
+                                style="font-family:'BalginBold','Impact','Trebuchet MS',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;text-decoration:none;color:#7dff9f;font-size:14px;text-align:center;display:block;margin: 5px 40px;">
+                                Shop Sugar Cane
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td
+                            style="background-color:#010018;border:2px solid #7dff9f;border-radius:28px;border-collapse:separate;">
+                            <a href="https://www.orbitalcoffee.com/collections/half-caff-coffee" target="_blank"
+                                style="font-family:'BalginBold','Impact','Trebuchet MS',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;text-decoration:none;color:#7dff9f;font-size:14px;text-align:center;display:block;margin: 5px 40px;">
+                                Shop Half-Caff
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td
+                            style="background-color:#010018;border:2px solid #7dff9f;border-radius:28px;border-collapse:separate;">
+                            <a href="https://www.orbitalcoffee.com/products/jitter-free-orbital-coffee-subscription"
+                                target="_blank"
+                                style="font-family:'BalginBold','Impact','Trebuchet MS',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;text-decoration:none;color:#7dff9f;font-size:14px;text-align:center;display:block;margin: 5px 40px;">
+                                Subscribe & Save
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p
+                    style="font-family:'Lato','Helvetica neue','Helvetica','Arial',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:1px;text-decoration:none;color:#7dff9f;font-size:10px;width:100%;text-align:center;margin-top:25px;margin-bottom:15px;">
+                    Copyright © 2024 Orbital Coffee, All rights reserved.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p
+                    style="font-family:'Lato','Helvetica neue','Helvetica','Arial',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:1px;text-decoration:none;color:#7dff9f;font-size:10px;width:100%;text-align:center;margin:0px;">
+                    If you have any questions, contact us at
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="mailto:{{ shop.email }}" target="_blank"
+                    style="font-size:10px;text-decoration:underline;text-align:center;font-family:'Lato','Helvetica neue','Helvetica','Arial',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#7dff9f;margin:0px;display: block;">
+                    {{ shop.email }}
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="{{ shop.url }}" target="_blank"
+                    style="font-family:'BalginBold','Impact','Trebuchet MS',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;text-decoration:none;color:#7dff9f;font-size:14px;width:100%;text-align:center;display:block;margin-top:15px; margin-bottom: 40px;">
+                    www.orbitalcoffee.com
+                </a>
+            </td>
+        </tr>
     </table>
-    
-
-    <div class="body">
-            <div class="logo">
-                <img src="https://cdn.shopify.com/s/files/1/0742/6297/0669/files/logo-mobv2.png?v=1710162806" />
-                <span>Decaf coffee out of this world</span>
-            </div>
-            <img src="https://cdn.shopify.com/s/files/1/0742/6297/0669/files/nave_email.gif?v=1726068027" class="ufo" />
-            <h1>Hello</br>Earthling</h1>
-            <p class="name">[[contact.first_name]]</p>
-            <p class="base_paragraph">your signal requesting 'abduction' via our portal was received</p>
-            <p class="base_paragraph">prepare yourself for decaf so good, it's out of this <b>world</b>!</p>
-        </div>
-    </div>
-    -->
 </body>
 
 </html>
